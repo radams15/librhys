@@ -9,6 +9,8 @@ set(FILES
         src/rhys.c
         include/rhys.h
         include/macros.h
+        src/logger.c
+        include/logger.h
 )
 
 if(BUILD_SHARED_LIBS)
@@ -16,6 +18,9 @@ if(BUILD_SHARED_LIBS)
 else()
     add_library(rhys STATIC ${FILES})
 endif()
+
+add_executable(rhys_test test/test.c)
+target_link_libraries(rhys_test rhys)
 
 set_target_properties(rhys PROPERTIES
         VERSION ${PROJECT_VERSION}

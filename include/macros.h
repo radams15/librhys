@@ -12,4 +12,6 @@ fprintf(stderr, __VA_ARGS__)
 #define dbprintf(...)
 #endif
 
+#define FUNC(name, ret, ...) typedef ret (* name)(__VA_ARGS__)
+
 #endif //MACROS_H
