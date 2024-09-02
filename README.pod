@@ -5,6 +5,7 @@
 Personal helper library
 
 =head3 Usage
+
     FetchContent_Declare(
         rhys
         GIT_REPOSITORY https://github.com/radams15/librhys.git
@@ -15,3 +16,5 @@ Personal helper library
     add_executable(exe ...)
 
     target_link_libraries(exe PRIVATE rhys)
+
+=cut
