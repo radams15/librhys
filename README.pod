@@ -1,0 +1,17 @@
+=pod
+
+=head1 librhys
+
+Personal helper library
+
+=head3 Usage
+    FetchContent_Declare(
+        rhys
+        GIT_REPOSITORY https://github.com/radams15/librhys.git
+        GIT_TAG        v0.1.0
+    )
+    FetchContent_MakeAvailable(rhys)
+
+    add_executable(exe ...)
+
+    target_link_libraries(exe PRIVATE rhys)

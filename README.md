@@ -1,2 +1,0 @@
-# librhys
-Personal helper library
