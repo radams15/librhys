@@ -5,9 +5,10 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#define eprintf(...) fprintf(stderr, __VA_ARGS__)
+
 #ifdef DEBUG
-#define dbprintf(...) \
-fprintf(stderr, __VA_ARGS__)
+#define dbprintf(...) eprintf(__VA_ARGS__)
 #else
 #define dbprintf(...)
 #endif
