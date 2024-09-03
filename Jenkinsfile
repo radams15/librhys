@@ -11,7 +11,7 @@ pipeline {
                 sh "mkdir -p build && cd build && cmake .. && cmake --build ."
 
                 script {
-                    archiveArtifacts artifacts: 'build/librhys.so*', 'build/librhys.a*', 'build/rhys_test', 'build/*.pc', 'include'
+                    archiveArtifacts artifacts: 'build/librhys.so*, build/librhys.a*, build/rhys_test, build/*.pc, include/'
                 }
             }
         }
