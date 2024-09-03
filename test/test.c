@@ -6,5 +6,6 @@
 #include <time.h>
 
 int main() {
+    log_init();
     log(LEVEL_INFO, "Some info\n");
 }

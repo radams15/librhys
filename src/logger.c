@@ -9,15 +9,29 @@
 #include <stdarg.h>
 #include <time.h>
 
-static void log_preamble(enum log_level level);
+struct logger rhys_default_logger = {.initialised = 0};
 
-#define log_fh stderr
+int log_preamble(struct logger* logger, enum log_level level);
 
-static log_preamble_func_t log_preamble_func = log_preamble;
-static enum log_level current_level;
+#define check_logger(logger) if(logger == NULL || logger->initialised != 1) { \
+    eprintf("Error: logger uninitialised on line: %d\n", __LINE__); \
+    return 1; \
+}
 
+int clog_init(struct logger* logger) {
+    *logger = (struct logger) {
+        .initialised = 1,
+        .current_level = LEVEL_INFO,
+        .out_fh =  stderr,
+        .preamble_func = log_preamble
+    };
 
-static void log_preamble(enum log_level level) {
+    return 0;
+}
+
+int log_preamble(struct logger* logger, enum log_level level) {
+    check_logger(logger);
+
     time_t current_time;
     time(&current_time);
 
@@ -26,22 +40,32 @@ static void log_preamble(enum log_level level) {
     char time_str[32];
     strftime(time_str, 32, "%y/%m/%d %H:%M:%S", time_info);
 
-    fprintf(log_fh, "[%s] => ", time_str);
+    fprintf(logger->out_fh, "[%s] => ", time_str);
+
+    return 0;
 }
 
-void log_set_preamble(log_preamble_func_t callback) {
-    log_preamble_func = callback;
+int clog_set_preamble(struct logger* logger, log_preamble_func_t callback) {
+    check_logger(logger);
+
+    logger->preamble_func = callback;
+
+    return 0;
 }
 
-void log(enum log_level level, const char *format, ...) {
-    if(level <= current_level)
-        return;
+int clog(struct logger* logger, enum log_level level, const char *format, ...) {
+    check_logger(logger);
+
+    if(level < logger->current_level)
+        return 1;
 
     va_list args;
     va_start(args, format);
 
-    log_preamble_func(level);
+    logger->preamble_func(logger, level);
     vfprintf(stderr, format, args);
 
     va_end(args);
+
+    return 0;
 }
