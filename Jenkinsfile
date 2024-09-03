@@ -9,6 +9,10 @@ pipeline {
             }
             steps {
                 sh "mkdir -p build && cd build && cmake .. && cmake --build ."
+
+                script {
+                    archiveArtifacts artifacts: 'build/'
+                }
             }
         }
     }
