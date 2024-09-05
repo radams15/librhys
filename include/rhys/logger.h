@@ -37,5 +37,6 @@ int clog(struct logger* logger, enum log_level level, const char *format, ...);
 
 #define log(...) clog(&rhys_default_logger, __VA_ARGS__)
 #define log_init() clog_init(&rhys_default_logger)
+#define log_set_preamble(callback) clog_set_preamble(&rhys_default_logger, callback)
 
 #endif //LOGGER_H

@@ -28,8 +28,6 @@ int clog_init(struct logger* logger) {
 }
 
 int log_preamble(struct logger* logger, enum log_level level) {
-    check_logger(logger);
-
     time_t current_time;
     time(&current_time);
 
