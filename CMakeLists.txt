@@ -18,10 +18,16 @@ set(FILES
         include/rhys/logger.h
 )
 
+option(BUILD_LOGGER "Build the logger module" Yes)
+
 if(BUILD_SHARED_LIBS)
     add_library(rhys SHARED ${FILES})
 else()
     add_library(rhys STATIC ${FILES})
+endif()
+
+if(BUILD_LOGGER)
+    target_compile_definitions(rhys PUBLIC RHYS_BUILD_LOGGER Yes)
 endif()
 
 add_executable(rhys_test test/test.c)
