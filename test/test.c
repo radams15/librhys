@@ -2,7 +2,7 @@
 // Created by rhys on 02/09/24.
 //
 
-#include <rhys.h>
+#include <rhys/rhys.h>
 #include <time.h>
 
 int main() {

@@ -7,10 +7,10 @@ set(CMAKE_C_STANDARD 99)
 
 set(FILES
         src/rhys.c
-        include/rhys.h
-        include/macros.h
+        include/rhys/rhys.h
+        include/rhys/macros.h
         src/logger.c
-        include/logger.h
+        include/rhys/logger.h
 )
 
 if(BUILD_SHARED_LIBS)
@@ -25,7 +25,7 @@ target_link_libraries(rhys_test rhys)
 set_target_properties(rhys PROPERTIES
         VERSION ${PROJECT_VERSION}
         SOVERSION ${PROJECT_VERSION_MAJOR}
-        PUBLIC_HEADER include/rhys.h)
+        PUBLIC_HEADER include/rhys/rhys.h)
 
 configure_file(rhys.pc.in rhys.pc @ONLY)
 
