@@ -29,7 +29,7 @@ set_target_properties(rhys PROPERTIES
 
 configure_file(rhys.pc.in rhys.pc @ONLY)
 
-target_include_directories(rhys PUBLIC include/)
+target_include_directories(rhys PRIVATE include/ include/rhys)
 include_directories(include/)
 target_include_directories(rhys PRIVATE src/)
 

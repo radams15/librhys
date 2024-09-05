@@ -4,8 +4,6 @@
 
 #include "logger.h"
 
-#include "rhys.h"
-
 #include <stdarg.h>
 #include <time.h>
 
