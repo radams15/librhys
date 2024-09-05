@@ -6,8 +6,6 @@ include(Versioning.cmake)
 
 set(PROJECT_VERSION ${LIBRHYS_VERSION} CACHE STATIC "" FORCE)
 
-message(WARNING ${LIBRHYS_VERSION})
-
 set(CMAKE_C_STANDARD 99)
 
 set(FILES
