@@ -2,6 +2,8 @@
 
 =head1 librhys
 
+=for html <p><img src="https://jenkins.therhys.co.uk/job/librhys/badge/icon?style=plastic">
+
 Personal helper library
 
 =head3 Usage
