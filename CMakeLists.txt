@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.13)
 project(rhys VERSION 0.1.0 DESCRIPTION "Rhys' helper library" LANGUAGES C CXX)
 
 include(GNUInstallDirs)
+include(Versioning.cmake)
+
+set(PROJECT_VERSION ${LIBRHYS_VERSION} CACHE STATIC "" FORCE)
+
+message(WARNING ${LIBRHYS_VERSION})
 
 set(CMAKE_C_STANDARD 99)
 
@@ -24,7 +29,6 @@ target_link_libraries(rhys_test rhys)
 
 set_target_properties(rhys PROPERTIES
         VERSION ${PROJECT_VERSION}
-        SOVERSION ${PROJECT_VERSION_MAJOR}
         PUBLIC_HEADER include/rhys/rhys.h)
 
 configure_file(rhys.pc.in rhys.pc @ONLY)

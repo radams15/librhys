@@ -7,6 +7,8 @@
 #include <stdarg.h>
 #include <time.h>
 
+#ifdef RHYS_BUILD_LOGGER && RHYS_USE_LOGGER
+
 struct logger rhys_default_logger = {.initialised = 0};
 
 int log_preamble(struct logger* logger, enum log_level level);
@@ -65,3 +67,5 @@ int clog(struct logger* logger, enum log_level level, const char *format, ...) {
 
     return 0;
 }
+
+#endif
