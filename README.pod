@@ -6,7 +6,7 @@
 
 Personal helper library
 
-=head3 Usage
+=head2 Usage (CMake)
 
     FetchContent_Declare(
         rhys
@@ -18,5 +18,56 @@ Personal helper library
     add_executable(exe ...)
 
     target_link_libraries(exe PRIVATE rhys)
+
+=head2 Features
+
+=head3 Macros
+
+Includes the following macros:
+
+    eprintf(...) // Prints to stderr
+
+    dbprintf(...) // Print to stderr if macro DEBUG is defined
+
+    FUNC(type_name, return_type, param_types...) // Easier C function type definer
+
+=head3 Logging
+
+=head4 Setting up the logger:
+
+    struct logger logger;
+    clog_init(&logger);
+
+    // Custom settings:
+    logger.current_level = LEVEL_DEBUG; // Set by default to LOG_INFO
+    logger.out_fh = stdout; // Set by default to stderr
+
+=head4 Using the logger:
+
+    clog(&logger, LEVEL_INFO, "Some general info\n");
+    log(&logger, LEVEL_DEBUG, "Some debugging info\n");
+
+
+=head4 Using a custom log preamble:
+
+Loggers can be given a custom callback to call before the requested log text.
+
+Logger preambles must be of the type C<log_preamble_func_t>, as below.
+
+    int callback_func(struct logger* logger, enum log_level level) {
+        fprintf(logger->out_fh, "[LOG] => ");
+
+        return 0;
+    }
+
+    clog_set_preamble(&logger, callback_func);
+
+=head4 Using the default logger:
+
+The default logger can be used with the helper macros which use the global logger C<rhys_default_logger>:
+
+    log_init();
+    log(LEVEL_INFO, "Some general info\n");
+    log_set_preamble(callback_func);
 
 =cut
